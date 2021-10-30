@@ -1,0 +1,508 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Simple REST API (CoffeeRestAPI)",
+    "description" : "REST API documentation for CST-391 Milestone 2",
+    "contact" : {
+      "name" : "Micah Miller",
+      "url" : "http://localhost:44380"
+    },
+    "version" : "1.1"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/mmiller2321/CoffeeRestAPI/1.1",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "http://localhost:44380",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "paths" : {
+    "/Products" : {
+      "get" : {
+        "summary" : "Operation to Fetch all Products",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Products/Create/{id}" : {
+      "get" : {
+        "summary" : "Operation to Create a Product and send it to the database",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The product ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Products/Details/{id}" : {
+      "get" : {
+        "summary" : "Operation to READ a specific product from the database",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The product ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Products/Edit/{id}" : {
+      "get" : {
+        "summary" : "Operation to UPDATE a specific product from the database",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The product ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Products/Delete/{id}" : {
+      "get" : {
+        "summary" : "Operation to DELETE a specific product from the database",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The product ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Delete a product",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The product ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Operation to DELETE a specific product from the database",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/products"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/products"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "/application/getjson" : {
+                "schema" : {
+                  "example" : "The server could not understand the request due to invalid syntax."
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "Although the HTTP standard specifies unauthorized, semantically this response means unauthenticated. That is, the client must authenticate itself to get the requested response."
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server can not find the requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is probably the most well known due to its frequent occurrence on the web."
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server has encountered a situation it does not know how to handle."
+              }
+            }
+          },
+          "503" : {
+            "description" : "Service Unavailable",
+            "content" : {
+              "/application/getjson" : {
+                "example" : "The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This response should be used for temporary conditions and the Retry-After HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "products" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "orderNo" : {
+            "type" : "string",
+            "example" : "Pears"
+          },
+          "ProductDescription" : {
+            "type" : "string",
+            "example" : "Pears are fruits produced and consumed around the world, growing on a tree and harvested in the Northern Hemisphere in late summer into October. The pear tree and shrub are a species of genus Pyrus, in the family Rosaceae, bearing the pomaceous fruit of the same name."
+          }
+        }
+      }
+    }
+  }
+}
